@@ -6,13 +6,13 @@
 /*   By: cdrouet <cdrouet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/02 09:30:19 by cdrouet           #+#    #+#             */
-/*   Updated: 2017/01/02 10:28:03 by cdrouet          ###   ########.fr       */
+/*   Updated: 2017/01/03 09:18:21 by cdrouet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "computer.h"
 
-t_unknownValues	*createUnknownElement()
+t_unknownValues	*create_unknown_element()
 {
 	t_unknownValues	*unknownElement;
 
@@ -27,7 +27,7 @@ t_unknownValues	*createUnknownElement()
 	return (unknownElement);
 }
 
-void		addElement(t_unknownValues *element, t_unknownValues **lst)
+void		add_element(t_unknownValues *element, t_unknownValues **lst, char side)
 {
 	t_unknownValues	*tmp;
 
@@ -36,8 +36,10 @@ void		addElement(t_unknownValues *element, t_unknownValues **lst)
 		*lst = element;
 	else
 	{
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = element;
+		element->parent = *lst;
+		if (side == 'l')
+			tmp->left = element;
+		else
+			tmp->right = element;
 	}
 }
